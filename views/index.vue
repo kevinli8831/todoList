@@ -31,6 +31,11 @@ import FinishList from "@/components/FinishList";
 export default {
   name: "todoList",
   components: { FinishList, Todo, Calendar },
+  mounted() {
+    if (localStorage.getItem("TodoList")) {
+      this.todoList = JSON.parse(localStorage.getItem("TodoList"));
+    }
+  },
   data() {
     return {
       todoList: [],
@@ -57,6 +62,7 @@ export default {
           }
         )
       );
+      localStorage.TodoList = JSON.stringify(this.todoList);
     },
     finishItem(index) {
       console.log(index, "index");

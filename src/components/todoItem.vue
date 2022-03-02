@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="d-flex justify-space-between todoItem">
-      <div v-if="!isEdit">{{ text }}</div>
+      <div v-if="!isEdit" style="text-shadow: 0px 0px 5px grey">
+        {{ text }}
+      </div>
       <input
         v-else
         id="modifiedText"
@@ -51,7 +53,7 @@ export default {
       default: 0,
     },
     created_at: {
-      type: Date,
+      type: [Date, String],
       default: null,
     },
     mode: {
@@ -100,6 +102,7 @@ export default {
   border-radius: 5px;
   background-color: white;
   box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+  /*box-shadow: 0px 0px 2px grey;*/
 }
 
 .list-enter-active,
