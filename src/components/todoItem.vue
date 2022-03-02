@@ -105,6 +105,10 @@ export default {
   /*box-shadow: 0px 0px 2px grey;*/
 }
 
+.todoItem:hover {
+  box-shadow: rgb(0 0 0 / 5%) 0px 8px 30px 0px, rgb(0 0 0 / 8%) 0px 0px 4px 2px;
+}
+
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s;

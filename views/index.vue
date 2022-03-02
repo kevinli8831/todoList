@@ -35,6 +35,9 @@ export default {
     if (localStorage.getItem("TodoList")) {
       this.todoList = JSON.parse(localStorage.getItem("TodoList"));
     }
+    if (localStorage.getItem("FinishList")) {
+      this.finishList = JSON.parse(localStorage.getItem("FinishList"));
+    }
   },
   data() {
     return {
@@ -52,6 +55,10 @@ export default {
   },
   methods: {
     moment,
+    saveLocal() {
+      localStorage.TodoList = JSON.stringify(this.todoList);
+      localStorage.FinishList = JSON.stringify(this.finishList);
+    },
     addTodo(text, date) {
       this.todoList.push(
         Object.assign(
@@ -62,29 +69,34 @@ export default {
           }
         )
       );
-      localStorage.TodoList = JSON.stringify(this.todoList);
+      this.saveLocal();
     },
     finishItem(index) {
       console.log(index, "index");
       this.todoList[index].finished_at = moment()._d;
       this.finishList.push(this.todoList[index]);
       this.todoList.splice(index, 1);
+      this.saveLocal();
     },
     editItem(text, index) {
       this.todoList[index].text = text;
+      this.saveLocal();
       console.log(text, index, "index");
     },
     deleteItem(index) {
       this.todoList.splice(index, 1);
+      this.saveLocal();
     },
     FinishDeleteItem(index) {
       this.finishList.splice(index, 1);
+      this.saveLocal();
     },
     backToTodoList(i) {
       try {
         this.finishList[i].created_at = moment()._d;
         this.todoList.push(this.finishList[i]);
         this.finishList.splice(i, 1);
+        this.saveLocal();
       } catch (e) {
         console.log(e);
       }
